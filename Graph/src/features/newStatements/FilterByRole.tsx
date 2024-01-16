@@ -18,11 +18,11 @@ export default function FilterByRole() {
             onClick={() => handleFilter("Photographer")}
             type="button"
             variant="ghost"
-            size="lg"
+            size="sm"
             color="primary"
             className={`${!isDark && "text-stone-200"} ${
               currentFilterValue === "Photographer" &&
-              "bg-primary-500 text-stone-200"
+              "bg-primary-500 text-stone-200 py-4"
             }`}
           >
             ფოტოგრაფები
@@ -31,7 +31,7 @@ export default function FilterByRole() {
             onClick={() => handleFilter("Videographer")}
             type="button"
             variant="ghost"
-            size="lg"
+            size="sm"
             color="primary"
             className={`${!isDark && "text-stone-200"} ${
               currentFilterValue === "Videographer" &&
@@ -44,7 +44,7 @@ export default function FilterByRole() {
             onClick={() => handleFilter("VideoEditor")}
             type="button"
             variant="ghost"
-            size="lg"
+            size="sm"
             color="primary"
             className={`${!isDark && "text-stone-200"} ${
               currentFilterValue === "VideoEditor" &&
@@ -59,7 +59,7 @@ export default function FilterByRole() {
             onClick={() => handleFilter("DronePilot")}
             type="button"
             variant="ghost"
-            size="lg"
+            size="sm"
             color="primary"
             className={`${!isDark && "text-stone-200"} ${
               currentFilterValue === "DronePilot" &&
@@ -72,7 +72,7 @@ export default function FilterByRole() {
             onClick={() => handleFilter("Studio")}
             type="button"
             variant="ghost"
-            size="lg"
+            size="sm"
             color="primary"
             className={`${!isDark && "text-stone-200"} ${
               currentFilterValue === "Studio" && "bg-primary-500 text-stone-200"
@@ -84,7 +84,7 @@ export default function FilterByRole() {
             onClick={() => handleFilter("all")}
             type="button"
             variant="ghost"
-            size="lg"
+            size="sm"
             color="primary"
             className={`${!isDark && "text-stone-200"} ${
               currentFilterValue === "all" && "bg-primary-500 text-stone-200"

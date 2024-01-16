@@ -26,7 +26,6 @@ export default function EditUserName() {
   } = useForm<IEditName>();
 
   if (isUserPending) return <Loader color="primary" />;
-  console.log(userData);
 
   const onsubmit: SubmitHandler<IEditName> = (data) => {
     const newData = {

@@ -19,7 +19,6 @@ export default function ConfrimDeleting({
 }) {
   const { deletePost, isPostDeleting } = useDeletePortfolio();
   function handleDelete(onClose: { (): void; (): void }) {
-    console.log("click");
     deletePost(postId);
     onClose();
   }

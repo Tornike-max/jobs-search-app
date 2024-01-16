@@ -5,6 +5,7 @@ import { Button } from "@nextui-org/button";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 import { GiFemale, GiMale } from "react-icons/gi";
 import { useDarkMode } from "../../context/useDarkMode";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function UserStatements() {
   const navigate = useNavigate();
@@ -17,7 +18,6 @@ export default function UserStatements() {
   const getGender = searchParams.get("gender") || "";
   const getSortedAge = searchParams.get("sortByAge") || "";
   const getSortedPrice = searchParams.get("sortByPrice") || "";
-  console.log(getSortedPrice);
   const shootStyle =
     searchParams.get("shootStylePhoto") ||
     searchParams.get("shootStyleDrone") ||
@@ -39,6 +39,7 @@ export default function UserStatements() {
 
   if (isFiltering) return <Loader color="primary" />;
   function nextPageFunc() {
+    if (Number(currentPage) === 2) return currentPage;
     const nextPage = Number(currentPage) + 1;
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("page", String(nextPage));
@@ -52,21 +53,21 @@ export default function UserStatements() {
     setSearchParams(newSearchParams.toString());
   }
 
-  console.log(filtered);
   return (
     <div className="flex flex-col justify-center items-center gap-4 w-full px-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto  w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto w-full">
         {filtered && filtered?.length > 0 ? (
           filtered?.map((document) => (
             <div
               key={document.$id}
-              className={`w-full max-w-[1920px] ${
-                !isDark ? "bg-primary-900" : "bg-white"
-              } border border-gray-200 rounded-lg shadow transition-all duration-150`}
+              className={`max-w-[1920px] ${
+                !isDark ? "bg-primary-900" : "''"
+              } border border-gray-200 flex justify-center items-center flex-col rounded-lg shadow-lg transition-all duration-150`}
             >
               <Link to={`/account/${document?.accountId}`}>
-                <img
-                  className="rounded-t-lg h-96 w-full"
+                <LazyLoadImage
+                  placeholderSrc="placeholder.jpg"
+                  className="rounded-t-lg h-80 sm:h-96 w-full"
                   src={document?.imageUrl}
                   alt="user image"
                 />

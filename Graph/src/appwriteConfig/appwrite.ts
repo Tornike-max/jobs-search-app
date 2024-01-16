@@ -3,18 +3,24 @@ import { Account, Avatars, Client, Databases, Storage } from "appwrite";
 export const client = new Client();
 
 export const appwriteConfig = {
-  projectId: "6582c2d13491b3154ab3",
-  endPoint: "https://cloud.appwrite.io/v1",
-  databaseId: "6583388bba24add738c5",
-  userCollectionId: "658443afdfca459eff7b",
-  portfolioCollectionId: "658445567fbb69e8409a",
-  commentCollectionId: "6589ff93d24eb0d4b54a",
-  aboutCollectionId: "658fee0fa35e5a14215c",
-  publicationCollectionId: "6593f42ba07107830fe8",
-  imagesCollectionId: "65997d08f056bec3ddee",
-  jobCollectionId: "659c32adc2c4471a2414",
-  companiesCollectionId: "659e89824cdcd073f948",
-  storageId: "6583674e276530bed6ec",
+  projectId: import.meta.env.VITE_APPWRITE_PROJECT_ID as string,
+  endPoint: import.meta.env.VITE_APPWRITE_ENDPOINT as string,
+  databaseId: import.meta.env.VITE_APPWRITE_DATABASE_ID as string,
+  userCollectionId: import.meta.env.VITE_APPWRITE_USER_COLLECTION_ID as string,
+  portfolioCollectionId: import.meta.env
+    .VITE_APPWRITE_PORTFOLIO_COLLECTION_ID as string,
+  commentCollectionId: import.meta.env
+    .VITE_APPWRITE_COMMENT_COLLECTION_ID as string,
+  aboutCollectionId: import.meta.env
+    .VITE_APPWRITE_ABOUT_COLLECTION_ID as string,
+  publicationCollectionId: import.meta.env
+    .VITE_APPWRITE_PUBLICATION_COLLECTION_ID as string,
+  imagesCollectionId: import.meta.env
+    .VITE_APPWRITE_IMAGES_COLLECTION_ID as string,
+  jobCollectionId: import.meta.env.VITE_APPWRITE_JOB_COLLECTION_ID as string,
+  companiesCollectionId: import.meta.env
+    .VITE_APPWRITE_COMPANIES_COLLECTION_ID as string,
+  storageId: import.meta.env.VITE_APPWRITE_STORAGE_ID as string,
 };
 
 client

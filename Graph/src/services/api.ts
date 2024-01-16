@@ -30,8 +30,6 @@ export async function createNewUser(user: InewUser) {
 
     const avatarUrl = avatars.getInitials(user?.name);
 
-    console.log(newAccount);
-    console.log(user);
     const newUser = await saveUserToDB({
       accountId: newAccount.$id,
       email: newAccount.email,
@@ -39,7 +37,6 @@ export async function createNewUser(user: InewUser) {
       imageUrl: avatarUrl,
       imageId: crypto.randomUUID(),
     });
-    console.log(newUser);
     return newUser;
   } catch (error) {
     console.error(error);
@@ -54,7 +51,6 @@ export async function saveUserToDB(user: {
   imageId: string;
 }) {
   try {
-    console.log(user);
     const newUser = await databases.createDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
@@ -62,7 +58,6 @@ export async function saveUserToDB(user: {
       user
     );
     if (!newUser) throw Error();
-    console.log(newUser);
     return newUser;
   } catch (error) {
     console.error(error);
@@ -89,7 +84,6 @@ export async function createCompanyAccount(newCompany: InewCompany) {
       imageUrl: avatar,
       imageId: crypto.randomUUID(),
     });
-    console.log(newAcc);
     return newAcc;
   } catch (error) {
     console.error(error);
@@ -112,7 +106,6 @@ export async function saveCompanyToDb(company: {
     );
 
     if (!newCompany) throw Error();
-    console.log(newCompany);
     return newCompany;
   } catch (error) {
     console.error(error);
@@ -120,7 +113,6 @@ export async function saveCompanyToDb(company: {
 }
 
 export async function loginUser(user: IlogInUser) {
-  console.log(user);
   try {
     const promise = await account.createEmailSession(user.email, user.password);
 
@@ -145,8 +137,6 @@ export async function getCurrentUser() {
     const currentAccount = await account.get();
     if (!currentAccount) return;
 
-    console.log(currentAccount);
-
     const currentUser = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
@@ -154,7 +144,6 @@ export async function getCurrentUser() {
     );
     if (!currentUser) return;
 
-    console.log(currentUser.documents);
     return currentUser.documents[0];
   } catch (error) {
     console.error(error);
@@ -165,7 +154,6 @@ export async function getCurrentCompany() {
   try {
     const currentAccount = await account.get();
     if (!currentAccount) return;
-    console.log(currentAccount.$id);
 
     const currentUser = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -173,7 +161,6 @@ export async function getCurrentCompany() {
       [Query.equal("accountId", currentAccount.$id)]
     );
     if (!currentUser) return;
-    console.log(currentUser.documents);
     return currentUser.documents[0];
   } catch (error) {
     console.error(error);
@@ -249,7 +236,7 @@ export async function getUserFromDB(accountId: string) {
     if (!session) return;
     return session.documents[0];
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -316,7 +303,6 @@ export async function addNewLinks({
   instagramUrl: string;
   userId: string;
 }) {
-  console.log(instagramUrl, linkedinUrl, userId);
   try {
     const promise = databases.updateDocument(
       appwriteConfig.databaseId,
@@ -343,7 +329,6 @@ export async function addNewLocation({
   location: string;
   userId: string;
 }) {
-  console.log(location, userId);
   try {
     const promise = databases.updateDocument(
       appwriteConfig.databaseId,
@@ -371,7 +356,6 @@ export async function addExperienceAndEducation({
   education: string;
   userId: string;
 }) {
-  console.log(experience, userId);
   try {
     const promise = databases.updateDocument(
       appwriteConfig.databaseId,
@@ -402,8 +386,6 @@ export async function addNewSkill(skill: string, userId: string) {
     const existingSkills: string[] = userDocument.skills || [];
 
     const isAlreadyInThere = existingSkills.includes(skill);
-
-    console.log(isAlreadyInThere);
 
     if (isAlreadyInThere === true) {
       toast.error("You already have this skill in your list");
@@ -447,8 +429,6 @@ export async function addNewShootingStyle(event: string, userId: string) {
     }
 
     existingEvents.push(event);
-
-    console.log(shootingStylePromise);
 
     const promise = await databases.updateDocument(
       appwriteConfig.databaseId,
@@ -622,7 +602,7 @@ export async function deleteImage(documentId: string) {
 
 export async function getAllPosts({ pageParam }: { pageParam: string | null }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(3)];
+  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(6)];
 
   if (pageParam) {
     queries.push(Query.cursorAfter(pageParam.toString()));
@@ -684,7 +664,7 @@ export async function userCommentsOnPost({
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -721,7 +701,6 @@ export async function filterUsers(
   getSortedPrice: string
 ) {
   const offset = (curPage - 1) * MAX_RESULTS_PER_PAGE;
-  console.log(shootStyle);
   try {
     const queries: string[] = [];
 
@@ -751,7 +730,6 @@ export async function filterUsers(
       queries.push(Query.equal("gender", getGender));
     }
     if (shootStyle) {
-      console.log("movida");
       queries.push(Query.equal("provided_events", shootStyle));
     }
 
@@ -853,7 +831,7 @@ export async function getVacancies() {
 export async function filterJobs(
   region: string = "ყველა",
   getCategory: string = "ყველა",
-  search: string,
+  searchValue: string,
   getSalary: string,
   getSortSalary: string,
   pageParam: { pageParam: number }
@@ -885,8 +863,9 @@ export async function filterJobs(
       queries.push(Query.equal("category", getCategory));
     }
 
-    if (search) {
-      queries.push(Query.equal("caption", search));
+    if (searchValue) {
+      console.log(searchValue);
+      queries.push(Query.equal("name", searchValue));
     }
 
     if (getSalary) {
@@ -925,8 +904,6 @@ export async function updateJob(
   updatedData: HiOutlinePubType
 ) {
   try {
-    console.log(documentId);
-    console.log(updatedData);
     const promise = await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.jobCollectionId,

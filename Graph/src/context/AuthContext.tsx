@@ -102,7 +102,7 @@ export default function AuthProvider({
       }
       return false;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return false;
     } finally {
       setIsLoading(false);

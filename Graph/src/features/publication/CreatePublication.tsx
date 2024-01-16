@@ -11,7 +11,6 @@ export default function CreatePublication() {
   const [step, setStep] = useState<number>(0);
   const { user, company } = useUserContext();
   const { publicationType } = useParams();
-  console.log(company);
   const increase = () => {
     setPercent((prevPercent) => {
       const newPercent = prevPercent + 25;

@@ -18,6 +18,7 @@ export default function Contact() {
       name: data.name,
       description: data.description,
     };
+    if (!sendData) throw Error;
 
     emailjs
       .sendForm(
@@ -37,7 +38,6 @@ export default function Contact() {
         }
       );
     reset();
-    console.log(sendData);
   };
   return (
     <div className="max-w-[1920px] w-full flex justify-center items-center flex-col px-20">

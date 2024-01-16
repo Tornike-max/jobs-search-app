@@ -65,7 +65,7 @@ export default function SwipeableTemporaryDrawer() {
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
-      bgcolor={`${!isDark && "bg-primary-800"}`}
+      bgcolor={`${!isDark && "bg-primary-800 h-screen "}`}
     >
       <List
         className={`flex flex-col justify-start items-center gap-4 ${
@@ -85,7 +85,7 @@ export default function SwipeableTemporaryDrawer() {
                 endContent={<HiOutlineMoon />}
               >
                 <span className={`${!isDark && "text-white"}`}>
-                  {isDark ? "Dark Mode" : "Light Mode"}
+                  {!isDark ? "Dark Mode" : "Light Mode"}
                 </span>
               </Switch>
             </ListItemText>
@@ -215,7 +215,7 @@ export default function SwipeableTemporaryDrawer() {
         className={`${!isDark && "bg-primary-600"} transition-all duration-150`}
       />
       <List
-        className={`flex flex-col justify-start items-center gap-4 ${
+        className={`flex flex-col justify-start items-center gap-4 max-h-full ${
           !isDark && "bg-primary-800"
         } transition-all duration-150`}
       >
@@ -288,7 +288,7 @@ export default function SwipeableTemporaryDrawer() {
 
   return (
     <div className="flex justify-start items-center w-full">
-      <div>
+      <div className="">
         <Button onClick={toggleDrawer("left", true)}>
           <HiOutlineBars4
             className={`text-xl ${

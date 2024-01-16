@@ -15,11 +15,9 @@ export default function JobDescription() {
   const { data, isPending } = useGetSingleJob(vacancieId || "");
 
   if (isPending) return <Loader color="primary" />;
-  console.log(data);
   function handleNavigate() {
     navigate(`/company/${data?.companies?.$id}`);
   }
-  console.log(data);
   return (
     <div className="max-w-[1920px] w-full flex justify-center items-center flex-col gap-10 px-10 py-6">
       <div className="w-full flex justify-center items-start flex-col gap-4">

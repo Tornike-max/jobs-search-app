@@ -38,7 +38,6 @@ export default function PubSteps({
   const [location, setLocation] = useState("");
 
   const { publicationType } = useParams();
-  console.log(company);
   const {
     register,
     handleSubmit,

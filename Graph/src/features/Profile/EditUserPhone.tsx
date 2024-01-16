@@ -19,7 +19,6 @@ export default function EditUserName({ phone }: IEditPhone) {
   } = useForm<IEditPhone>();
 
   const onsubmit: SubmitHandler<IEditPhone> = (data) => {
-    console.log(data);
     setPhoneNumber(data.phone);
     onOpen();
   };

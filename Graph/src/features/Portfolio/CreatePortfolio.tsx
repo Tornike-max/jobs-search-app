@@ -45,7 +45,6 @@ export default function CreatePortfolio({ userData }: CreatePortfolioProps) {
   });
 
   const onSubmit: SubmitHandler<PortfolioTypes> = (data) => {
-    console.log(data);
     const image = data?.file;
     const newData = {
       location: data.location,

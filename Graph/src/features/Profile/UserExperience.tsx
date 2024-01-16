@@ -1,7 +1,4 @@
-import { allEventStyles } from "../../constants";
-
 export default function UserExperience({ experience }: { experience: string }) {
-  console.log(allEventStyles);
   return (
     <div className="flex flex-wrap gap-1">
       <div className="w-full flex justify-start text-2xl font-semibold text-indigo-600 pb-2">

@@ -5,6 +5,7 @@ import { useUserContext } from "../../context/useUserContext";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@nextui-org/react";
 import { useDarkMode } from "../../context/useDarkMode";
+import { HiOutlineArrowLeft } from "react-icons/hi2";
 
 export function UserHeader({
   name,
@@ -36,7 +37,6 @@ export function UserHeader({
   const handleFileSelected = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
-      console.log(file);
       const newData = {
         userId: accountId,
         file,
@@ -57,7 +57,17 @@ export function UserHeader({
               ? "from-primary-600 to-blue-700"
               : "from-purple-500 to-blue-500"
           } transition-all duration-150 w-full h-full`}
-        ></div>
+        >
+          <Button
+            onClick={() => navigate(-1)}
+            variant="ghost"
+            color="default"
+            className="ml-10 mt-4 text-stone-200 hover:text-stone-800"
+          >
+            <HiOutlineArrowLeft />
+            <span> Go Back</span>
+          </Button>
+        </div>
       </div>
       <div className="flex items-center flex-col md:flex-row">
         <div className="rounded-full overflow-hidden mr-4">

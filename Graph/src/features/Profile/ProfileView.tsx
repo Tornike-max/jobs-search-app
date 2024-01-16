@@ -24,7 +24,6 @@ export default function ProfileView({ userData }: Models.Document) {
   const { isBioAdding, addBio } = useUpdateBio();
   const { register, handleSubmit, reset } = useForm<IBio>();
 
-  console.log(userData);
   const onSubmit: SubmitHandler<IBio> = (data) => {
     const newData = {
       userId: userData?.$id || "",
@@ -42,7 +41,6 @@ export default function ProfileView({ userData }: Models.Document) {
   const handleFileSelected = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
-      console.log(file);
       const newData = {
         userId: userData?.$id,
         file,

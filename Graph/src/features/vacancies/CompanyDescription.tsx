@@ -14,7 +14,6 @@ export default function CompanyDescription() {
   const { data, isPending } = useGetSingleCompany(companyId || "");
 
   if (isPending) return <Loader color="primary" />;
-  console.log(data);
 
   function handleNavigate(id: string) {
     navigate(`/company/edit/${id}`);

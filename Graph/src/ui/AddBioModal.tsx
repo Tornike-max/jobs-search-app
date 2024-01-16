@@ -26,7 +26,6 @@ export default function AddBioModal({
 
   const { register, handleSubmit } = useForm<LinksType>();
   const onSubmit: SubmitHandler<LinksType> = (data) => {
-    console.log(data);
     if (!data) {
       toast.error("No Data");
     }

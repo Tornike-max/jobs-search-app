@@ -21,8 +21,8 @@ export default function FilterUserStatements() {
     searchParams.get("shootStyleVideo");
   return (
     <div className="w-full flex justify-center items-center">
-      <div className="flex w-full justify-center items-center flex-col gap-2 px-36">
-        <div className="flex items-center justify-center gap-2 w-full">
+      <div className="flex w-full justify-center items-center flex-col gap-2 px-24">
+        <div className="flex items-center justify-center flex-col sm:flex-row gap-2 w-full">
           <SearchStatements />
           <FilterUserLevel />
         </div>
@@ -63,7 +63,7 @@ export default function FilterUserStatements() {
             />
           </div>
         )}
-        <div className="flex items-center justify-center gap-2 w-full">
+        <div className="flex items-center justify-center flex-col sm:flex-row gap-2 w-full">
           <SortByAge />
           <SortByPrice />
           <FilterGender />

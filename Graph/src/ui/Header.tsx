@@ -24,7 +24,6 @@ export default function Header() {
   const activeLinkClasses = "bg-indigo-600 text-stone-200";
 
   const loginType = user.id === "" ? false : true;
-  console.log(loginType);
   return (
     <ul className="w-full flex justify-between items-center px-2">
       <div className="max-w-2xl w-full flex justify-center gap-1 items-center">

@@ -9,7 +9,6 @@ import { useState } from "react";
 import AddLinksModal from "../../ui/AddLinksModal";
 import AddLocationModal from "../../ui/AddLocationModal";
 import AddExperienceModal from "../../ui/AddExperienceModal";
-import { IUser } from "../../types/types";
 import { useDarkMode } from "../../context/useDarkMode";
 
 export default function UserInfo({
@@ -35,8 +34,7 @@ export default function UserInfo({
   const [isOpenLocation, setIsOpenLocation] = useState(false);
   const [isOpenUserInfo, setIsOpenUserInfo] = useState(false);
 
-  function handelHireUser(user: IUser) {
-    console.log(user);
+  function handelHireUser() {
     navigate(`/hire/user/${params.accountId}`);
   }
 
@@ -216,7 +214,7 @@ export default function UserInfo({
             color="primary"
             variant="ghost"
             size="md"
-            onClick={() => handelHireUser(user)}
+            onClick={() => handelHireUser()}
           >
             ამიყვანე სამსახურში
           </Button>

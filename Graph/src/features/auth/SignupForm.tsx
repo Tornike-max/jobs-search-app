@@ -79,12 +79,12 @@ export default function SignupForm() {
           <Chip
             variant="shadow"
             color="primary"
-            className="text-3xl font-semibold py-4"
+            className="text-xl sm:text-2xl font-semibold py-4"
             size="lg"
           >
             შექმენი აკაუნტი
           </Chip>
-          <span className="text-slate-200 font-semibold text-sm">
+          <span className="text-slate-200 font-semibold text-xs text-center">
             იმისთვის, რომ გამოიყენოთ აპლიკაცია, გთხოვთ შეიყვანეთ მონაცემები
           </span>
         </div>
@@ -146,7 +146,7 @@ export default function SignupForm() {
         </div>
 
         <div className="w-full px-4 gap-2 flex justify-center items-end flex-col">
-          <p className="text-white text-sm">
+          <p className="text-white text-xs">
             უკვე გაქვთ ანგარიში?, დააჭირეთ{" "}
             <Link className="text-indigo-500 font-semibold" to="/login">
               აქ

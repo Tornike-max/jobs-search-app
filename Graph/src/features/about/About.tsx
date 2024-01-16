@@ -8,7 +8,6 @@ export default function About() {
 
   if (isAboutPending) return <Loader color="primary" />;
 
-  console.log(aboutData);
   return (
     <div className="max-w-[1920px] w-full flex justify-center flex-col gap-10 items-center px-20 py-10">
       <h1

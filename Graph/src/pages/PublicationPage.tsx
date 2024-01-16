@@ -10,7 +10,6 @@ export default function PublicationPage() {
 
   if (isPending) return <Loader color="primary" />;
 
-  console.log(data);
   return (
     <>
       <Publication data={data && data} />

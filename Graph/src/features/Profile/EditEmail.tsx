@@ -29,7 +29,6 @@ export default function EditEmail() {
 
   if (isUserPending) return <Loader color="primary" />;
 
-  console.log(userData);
   const onsubmit: SubmitHandler<IEditEmail> = (data) => {
     setEmail(data.email);
     onOpen();

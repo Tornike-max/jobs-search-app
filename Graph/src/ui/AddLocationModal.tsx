@@ -28,7 +28,6 @@ export default function AddLocationModal({
   const { register, handleSubmit } = useForm<LocationType>();
 
   const onSubmit: SubmitHandler<LocationType> = (data) => {
-    console.log(data);
     if (!data) {
       toast.error("No Data");
     }

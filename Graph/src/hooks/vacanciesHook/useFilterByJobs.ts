@@ -11,14 +11,14 @@ import { Models } from "appwrite";
 export function useFilterByJobs(
   region: string,
   getCategory: string,
-  search: string,
+  searchValue: string,
   getSalary: string,
   getSortSalary: string
 ) {
   const options: UseInfiniteQueryOptions<Models.Document, Error> = {
     queryKey: [
-      `search-${search}`,
       `filterByRegion-${region}`,
+      `searchJob-${searchValue}`,
       `filterByCategory-${getCategory}`,
       `filterBySalary-${getSalary}`,
       `sortBySalary-${getSortSalary}`,
@@ -27,7 +27,7 @@ export function useFilterByJobs(
       filterJobs(
         region,
         getCategory,
-        search,
+        searchValue,
         getSalary,
         getSortSalary,
         pageParam
@@ -43,15 +43,3 @@ export function useFilterByJobs(
 
   return useInfiniteQuery(options);
 }
-// const { data, isPending } = useQuery({
-// queryKey: [
-//   `search-${search}`,
-//   `filterByRegion-${region}`,
-//   `filterByCategory-${getCategory}`,
-//   `filterBySalary-${getSalary}`,
-//   `sortBySalary-${getSortSalary}`,
-// ],
-//   queryFn: () => filterJobs(region, getCategory, search, getSalary),
-// });
-
-// return { data, isPending };

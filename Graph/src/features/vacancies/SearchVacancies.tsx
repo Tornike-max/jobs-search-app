@@ -16,7 +16,7 @@ export default function SearchVacancies() {
   }, [debouncedValue, searchParams, setSearchParams]);
 
   return (
-    <div>
+    <form>
       <Input
         type="search"
         placeholder="ძიება"
@@ -27,6 +27,6 @@ export default function SearchVacancies() {
           <GrSearch className="text-xl text-default-400 pointer-events-none flex-shrink-0" />
         }
       />
-    </div>
+    </form>
   );
 }

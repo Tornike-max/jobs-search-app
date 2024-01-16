@@ -48,24 +48,24 @@ export default function LoginFormCompany() {
     }
   };
   return (
-    <div className="max-w-[1920px] flex justify-center bg-primary-900 items-center">
+    <div className="max-w-[1920px] flex justify-center bg-primary-900 items-center h-screen">
       <div className="w-full h-screen shadow-2xl hidden md:flex justify-center items-center">
         <img src="vite.svg" className="w-96 h-96" />
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full mx-20 md:mx-6 flex justify-center items-center  flex-col my-24"
+        className="w-full mx-20 md:mx-6 flex justify-center items-center  flex-col my-14"
       >
         <div className="flex justify-center items-center flex-col mb-2">
           <Chip
             variant="shadow"
             color="primary"
-            className="text-3xl font-semibold py-4"
+            className="text-xl sm:text-2xl font-semibold py-4"
             size="lg"
           >
             შექმენით კომპანიის აკაუნტი
           </Chip>
-          <span className="text-slate-200 font-semibold py-2 text-sm">
+          <span className="text-slate-200 font-semibold py-2 text-xs text-center">
             იმისთვის, რომ გამოიყენოთ აპლიკაცია, გთხოვთ შეიყვანეთ მონაცემები
           </span>
         </div>

@@ -21,7 +21,6 @@ export function UserProfile() {
   const navigate = useNavigate();
   const { user, company } = useUserContext();
   const { accountId } = useParams<{ accountId: string }>();
-  console.log(accountId);
 
   const { userData, isUserPending } = useGetUserFromDB(accountId || "");
   const { data, isPending } = useGetSingleCompany(company.id || "");
@@ -29,7 +28,6 @@ export function UserProfile() {
   if (isUserPending || isPending) {
     return <Loader color="primary" />;
   }
-  console.log(data);
   return (
     <div className="max-w-[1920px] w-full">
       {/* Header */}

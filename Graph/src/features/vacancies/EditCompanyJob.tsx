@@ -32,7 +32,6 @@ export default function EditCompanyJob({
   } = useForm<HiOutlinePubType>();
 
   const onSubmit: SubmitHandler<HiOutlinePubType> = (data) => {
-    console.log(data);
     const updatedData = {
       name: data.name,
       email: data.email,
@@ -49,7 +48,6 @@ export default function EditCompanyJob({
       price: editedData?.price,
       users: "",
     };
-    console.log(updatedData);
     editData(updatedData);
   };
 

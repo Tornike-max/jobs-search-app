@@ -19,7 +19,6 @@ export default function SideBar() {
   const linkClasses =
     "py-2 px-3 text-sm font-serif rounded-md hover:bg-indigo-600 hover:text-stone-200 duration-200 transition-all";
   const activeLinkClasses = "bg-indigo-600 text-stone-200";
-  console.log(user);
   return (
     <nav className="flex flex-col gap-8 justify-start">
       <Link to="/" className="flex gap-2 items-center">

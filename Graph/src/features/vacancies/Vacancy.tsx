@@ -8,7 +8,6 @@ import FilterByCategory from "./FilterByCategory";
 import SearchVacancies from "./SearchVacancies";
 import { useDarkMode } from "../../context/useDarkMode";
 import FilterBySalary from "./FilterBySalary";
-import SortBySalary from "./SortBySalary";
 import { formatCurrency } from "../../ui/formatCurrency";
 import { Button } from "@nextui-org/button";
 import { Key } from "react";
@@ -23,7 +22,6 @@ export default function Vacancy() {
   const searchValue = searchParams.get("searchJob") || "";
   const getSalary = searchParams.get("filterJobSalary") || "";
   const getSortSalary = searchParams.get("sortBySalary") || "";
-  console.log(getSortSalary);
 
   const { data, isPending, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useFilterByJobs(
@@ -36,23 +34,19 @@ export default function Vacancy() {
 
   if (!data || isPending) return <Loader color="primary" />;
 
-  let sortedSalary;
-
-  // if (getSortSalary === "") sortedSalary = data?.map((d) => d);
-  // if (getSortSalary === "asc")
-  //   sortedSalary = data?.sort((a, b) => a.salary - b.salary);
-  // if (getSortSalary === "desc")
-  //   sortedSalary = data?.sort((a, b) => b.salary - a.salary);
   const infiniteData = data.pages;
-  console.log(infiniteData);
-
-  console.log(sortedSalary);
+  // if (getSortSalary === "") sortedSalary = infiniteData?.map((d) => d);
+  // if (getSortSalary === "asc")
+  //   sortedSalary = infiniteData?.map((d) => d.map((documents) => documents));
+  // if (getSortSalary === "desc")
+  //   sortedSalary = infiniteData?.sort((a, b) => b.salary - a.salary);
+  // console.log(infiniteData);
 
   return (
-    <div className="max-w-[1920px] mx-auto py-6 sm:px-6 lg:px-8">
+    <div className="max-w-[1920px] mx-auto py-6 px-10">
       <div className="w-full flex justify-center items-center flex-col pb-8 gap-4">
         <h1
-          className={`text-xl sm:text-3xl font-semibold ${
+          className={`text-base sm:text-2xl md:text-3xl font-semibold ${
             !isDark ? "text-stone-200" : "text-primary-600"
           }`}
         >
@@ -61,7 +55,9 @@ export default function Vacancy() {
         <Button
           onClick={() => navigate(`/publication`)}
           variant="ghost"
-          className={`${!isDark && "text-stone-200"}`}
+          className={`${
+            !isDark && "text-stone-200"
+          } w-40 sm:w-56 text-xs sm:text-base`}
           color="primary"
         >
           შექმენი განცხადება
@@ -69,14 +65,14 @@ export default function Vacancy() {
       </div>
       <div className="w-full flex justify-end items-center mb-2">
         <div className="max-w-2xl w-full flex-col  flex justify-center items-center gap-4 m-auto">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center flex-col sm:flex-row gap-4">
             <FilterByRegion />
             <FilterByCategory />
             <SearchVacancies />
           </div>
-          <div>
+          {/* <div>
             <SortBySalary />
-          </div>
+          </div> */}
           <div className="w-full">
             <FilterBySalary />
           </div>
@@ -192,12 +188,7 @@ export default function Vacancy() {
                             !isDark ? "text-stone-100" : "text-gray-800"
                           }`}
                         >
-                          <Link
-                            className="hover:underline"
-                            to={`/company/${job?.companies?.$id}`}
-                          >
-                            {formatCurrency(job.salary)}
-                          </Link>
+                          <p>{formatCurrency(job.salary)}</p>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">

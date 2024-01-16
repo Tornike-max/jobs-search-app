@@ -32,7 +32,6 @@ export default function Comments({
     };
     addComment(newComment);
   }
-  console.log(user);
   return (
     <div className="w-full flex flex-col gap-2">
       <div className="bt-[0.5px] border-stone-200 mt-2 flex items-center gap-1">

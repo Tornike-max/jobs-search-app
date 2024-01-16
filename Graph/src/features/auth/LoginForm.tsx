@@ -48,25 +48,25 @@ export default function LoginForm() {
     }
   };
   return (
-    <div className="max-w-[1920px] flex justify-center bg-primary-900 items-center">
+    <div className="max-w-[1920px] flex justify-center bg-primary-900 items-center h-screen">
       <div className="w-full h-screen shadow-2xl hidden md:flex justify-center items-center">
         <img src="vite.svg" className="w-96 h-96" />
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full mx-20 md:mx-6 flex justify-center items-center  flex-col my-24"
+        className="w-full mx-20 md:mx-6 flex justify-center items-center flex-col my-14 h-full"
       >
         <div className="flex justify-center items-center flex-col mb-2">
           <Chip
             variant="shadow"
             color="primary"
-            className="text-3xl font-semibold py-4"
+            className="text-xl sm:text-2xl font-semibold py-4"
             size="lg"
           >
-            Welcome Back!
+            შექმენით აკაუნტი
           </Chip>
-          <span className="text-slate-200 font-semibold py-2">
-            To use Graph, Please enter your details
+          <span className="text-slate-200 font-semibold py-2 text-xs text-center">
+            იმისთვის, რომ გამოიყენოთ აპლიკაცია, გთხოვთ შეიყვანეთ მონაცემები
           </span>
         </div>
 
@@ -99,10 +99,10 @@ export default function LoginForm() {
         </div>
 
         <div className="w-full px-4 gap-2 flex justify-center items-end flex-col">
-          <p className="text-white">
-            If you do not have an account, please click{" "}
+          <p className="text-white text-xs">
+            თუ თქვენ არ გაქვთ აკაუნტი, გთხოვთ დააჭირეთ{" "}
             <Link className="text-indigo-500 font-semibold" to="/signup">
-              Here
+              აქ
             </Link>
           </p>
           <Button

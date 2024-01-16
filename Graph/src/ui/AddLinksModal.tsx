@@ -25,7 +25,6 @@ export default function AddLinksModal({
   const { addLink, isLinkAdding } = useAddUrl();
   const { register, handleSubmit } = useForm<LinksType>();
   const onSubmit: SubmitHandler<LinksType> = (data) => {
-    console.log(data);
     if (!data) {
       toast.error("No Data");
     }

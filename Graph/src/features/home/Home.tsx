@@ -36,8 +36,7 @@ export default function Home({
     setModalImgUrl(imageUrl);
   }, []);
 
-  console.log(posts);
-
+  const placeholderImage = "placeholder.jpg";
   return (
     <div className="max-w-[1920px] w-full flex justify-center items-center">
       <div className="m-auto grid gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 ">
@@ -92,7 +91,7 @@ export default function Home({
                 </CardHeader>
                 <CardBody className="overflow-visible py-2 flex items-center">
                   <LazyLoadImage
-                    placeholderSrc={""}
+                    placeholderSrc={placeholderImage}
                     loading="lazy"
                     onClick={() => toggleModal(post.$id, post.imageUrl)}
                     alt="Card background"
@@ -115,7 +114,6 @@ export default function Home({
                       userId={post.$id}
                       post={post}
                       postId={post.$id}
-                      // imageUrl={post.creator.imageUrl}
                       postCreatorImg={post.creator.imageUrl}
                     />
                   )}

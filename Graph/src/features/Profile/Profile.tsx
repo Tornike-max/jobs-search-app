@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/useUserContext";
 import { useGetUserFromDB } from "../../hooks/authHooks/useGetUserFromDB";
 import Loader from "../../ui/Loader";
@@ -12,8 +12,6 @@ import { useDarkMode } from "../../context/useDarkMode";
 export default function Profile() {
   const { isDark } = useDarkMode();
   const navigate = useNavigate();
-  const params = useParams();
-  console.log(params);
   const { user } = useUserContext();
 
   const userFromDB = useGetUserFromDB(user?.accountId);

@@ -12,7 +12,7 @@ export default function SignUpPage() {
     setSearchParams(searchParams);
   }
   return (
-    <div className="bg-primary-900 pt-4">
+    <div className="bg-primary-900 h-full pt-4">
       <ButtonGroup className="flex items-center gap-2 justify-center w-full md:justify-end px-[15%]">
         <Button
           onClick={() => handleToggle("user")}
