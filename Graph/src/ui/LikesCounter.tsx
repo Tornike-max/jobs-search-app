@@ -6,6 +6,7 @@ import {
   HiOutlineHeart,
 } from "react-icons/hi2";
 import { useLike } from "../hooks/home/useLike";
+import { useNavigate } from "react-router-dom";
 
 interface LikesCounterProps {
   post?: Models.Document | undefined;
@@ -24,6 +25,8 @@ function LikesCounter({
   const { mutate: likePost } = useLike();
   const likeList = post?.likes.map((like: { $id: string }) => like.$id);
   const [likes, setLikes] = useState(likeList);
+  const getSession = localStorage.getItem("cookieFallback");
+  const navigate = useNavigate();
 
   const handleLikePost = useCallback(
     (e: React.MouseEvent) => {
@@ -57,13 +60,19 @@ function LikesCounter({
     <div className="w-full flex justify-between items-center">
       <p className="flex items-center gap-1 text-lg">
         <span>{likes.length}</span>
-        <span className="cursor-pointer" onClick={handleLikePost}>
-          {checkIsLiked ? (
-            <HiHeart className="text-red-500" />
-          ) : (
+        {getSession?.includes("a_session_") ? (
+          <span className="cursor-pointer" onClick={handleLikePost}>
+            {checkIsLiked ? (
+              <HiHeart className="text-red-500" />
+            ) : (
+              <HiOutlineHeart className="text-red-500" />
+            )}
+          </span>
+        ) : (
+          <span className="cursor-pointer" onClick={() => navigate("/login")}>
             <HiOutlineHeart className="text-red-500" />
-          )}
-        </span>
+          </span>
+        )}
       </p>
       <div className="flex items-center gap-1 text-lg flex-col">
         <button

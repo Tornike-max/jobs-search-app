@@ -3,8 +3,10 @@ import LoginForm from "../features/auth/LoginForm";
 
 import { useSearchParams } from "react-router-dom";
 import LoginFormCompany from "../features/auth/LoginFormCompany";
+import { useDarkMode } from "../context/useDarkMode";
 
 export default function LoginPage() {
+  const { isDark } = useDarkMode();
   const [searchParams, setSearchParams] = useSearchParams();
   const getFormType = searchParams.get("login") || "user";
 
@@ -13,8 +15,8 @@ export default function LoginPage() {
     setSearchParams(searchParams);
   }
   return (
-    <div className="bg-primary-900 pt-4">
-      <ButtonGroup className="flex items-center gap-2 justify-center w-full md:justify-end px-[15%]">
+    <div className={`${!isDark ? "bg-primary-800" : " "} pt-4`}>
+      <ButtonGroup className="flex items-center gap-2 justify-center w-full">
         <Button
           onClick={() => handleToggle("user")}
           variant="ghost"
@@ -22,7 +24,7 @@ export default function LoginPage() {
           size="sm"
           className={`${
             getFormType === "user" && "bg-primary-500 text-stone-100"
-          }`}
+          } ${!isDark && "text-stone-200"}`}
         >
           როგორც მომხმარებელი
         </Button>
@@ -33,7 +35,7 @@ export default function LoginPage() {
           size="sm"
           className={`${
             getFormType === "company" && "bg-primary-500 text-stone-100"
-          }`}
+          } ${!isDark && "text-stone-200"}`}
         >
           როგორც, კომპანია
         </Button>

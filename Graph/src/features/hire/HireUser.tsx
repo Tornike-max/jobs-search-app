@@ -21,6 +21,7 @@ export default function HireUser() {
   const { isDark } = useDarkMode();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const navigate = useNavigate();
+  const getSession = localStorage.getItem("cookieFallback");
 
   const { accountId } = useParams();
   const { userData, isUserPending } = useGetUserFromDB(accountId || "");
@@ -114,7 +115,7 @@ export default function HireUser() {
               } flex flex-wrap gap-2`}
             >
               {userData?.skills.map((skill: string) => (
-                <Chip variant="solid" color="primary">
+                <Chip key={skill} variant="solid" color="primary">
                   {skill}
                 </Chip>
               ))}
@@ -142,14 +143,25 @@ export default function HireUser() {
         >
           უკან
         </Button>
-        <Button
-          className={`${!isDark && "text-stone-200"}`}
-          onClick={() => onOpen()}
-          variant="ghost"
-          color="primary"
-        >
-          გააგზავნე იმეილი
-        </Button>
+        {getSession?.includes("a_session_") ? (
+          <Button
+            className={`${!isDark && "text-stone-200"}`}
+            onClick={() => onOpen()}
+            variant="ghost"
+            color="primary"
+          >
+            გააგზავნე იმეილი
+          </Button>
+        ) : (
+          <Button
+            className={`${!isDark && "text-stone-200"}`}
+            onClick={() => navigate("/login")}
+            variant="ghost"
+            color="primary"
+          >
+            გააგზავნე იმეილი
+          </Button>
+        )}
       </div>
       <EmployeSuggestModal isOpen={isOpen} onOpenChange={onOpenChange} />
     </div>

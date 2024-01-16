@@ -27,6 +27,7 @@ export function UserHeader({
   const { isDark } = useDarkMode();
   const { mutate: changeProfile, isPending: changing } =
     useChangeProfileImage();
+  const getSession = localStorage.getItem("cookieFallback");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handleButtonClick = () => {
@@ -102,7 +103,7 @@ export function UserHeader({
           </span>
         </div>
       </div>
-      {user.accountId === accountId && (
+      {user.accountId === accountId && getSession?.includes("a_session_") && (
         <div className="w-full flex justify-center items-center py-2 gap-1">
           <input
             type="file"

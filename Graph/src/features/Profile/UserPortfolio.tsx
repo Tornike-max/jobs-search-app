@@ -11,9 +11,10 @@ interface UserPortfolioProps {
     postId: string;
     portfolios: Models.Document;
   }[];
+  id: string;
 }
 
-const UserPortfolio: React.FC<UserPortfolioProps> = ({ portfolio }) => {
+const UserPortfolio: React.FC<UserPortfolioProps> = ({ portfolio, id }) => {
   return (
     <div className="portfolio-grid">
       {portfolio?.map((post, index) => (
@@ -24,6 +25,7 @@ const UserPortfolio: React.FC<UserPortfolioProps> = ({ portfolio }) => {
           imageUrl={post.imageUrl}
           $createdAt={post.$createdAt}
           postId={post.$id}
+          id={id}
         />
       ))}
     </div>

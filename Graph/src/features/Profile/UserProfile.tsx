@@ -28,6 +28,7 @@ export function UserProfile() {
   if (isUserPending || isPending) {
     return <Loader color="primary" />;
   }
+
   return (
     <div className="max-w-[1920px] w-full">
       {/* Header */}
@@ -101,7 +102,10 @@ export function UserProfile() {
             </Button>
           </div>
         )}
-        <UserPortfolio portfolio={userData?.portfolio} />
+        <UserPortfolio
+          portfolio={userData?.portfolio}
+          id={userData?.accountId}
+        />
       </div>
 
       <ProfileSpringModal

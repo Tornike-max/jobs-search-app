@@ -11,6 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import {
   HiOutlineArchiveBox,
   HiOutlineArrowLeftOnRectangle,
+  HiOutlineArrowRightOnRectangle,
   HiOutlineBars4,
   HiOutlineHomeModern,
   HiOutlineMoon,
@@ -21,7 +22,7 @@ import {
 
 import { MdOutlineFormatListBulleted } from "react-icons/md";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/useUserContext";
 import { useLogout } from "../hooks/authHooks/useLogout";
 import { Switch } from "@nextui-org/react";
@@ -31,9 +32,11 @@ type Anchor = "top" | "left" | "bottom" | "right";
 
 export default function SwipeableTemporaryDrawer() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { user, company } = useUserContext();
   const { logoutUser, isLogingOut } = useLogout();
   const { handleChange, isDark } = useDarkMode();
+  const getSession = localStorage.getItem("cookieFallback");
 
   const [state, setState] = React.useState({
     top: false,
@@ -94,57 +97,61 @@ export default function SwipeableTemporaryDrawer() {
 
         <ListItem disablePadding>
           <ListItemButton>
-            <ListItemText>
-              {loginType ? (
-                <Link
-                  className="flex gap-2 items-center"
-                  to={`/account/${user?.accountId}`}
-                >
-                  <img
-                    src={user?.imageUrl}
-                    className="h-12 w-12 rounded-full"
-                  />
+            {getSession?.includes("a_session_") && (
+              <ListItemText>
+                {loginType ? (
+                  <Link
+                    className="flex gap-2 items-center"
+                    to={`/account/${user?.accountId}`}
+                  >
+                    <img
+                      src={user?.imageUrl}
+                      className="h-12 w-12 rounded-full"
+                    />
 
-                  <div className="flex flex-col">
-                    <p className="body-bold font-serif text-xs">{user?.name}</p>
-                    <p
-                      className={`${
-                        !isDark ? "text-stone-200" : "text-stone-600"
-                      } font-serif text-[10px] xl:text-xs `}
-                    >
-                      {user?.email}
-                    </p>
-                  </div>
-                </Link>
-              ) : (
-                <Link
-                  className="flex gap-2 items-center"
-                  to={`/company/${company?.id}`}
-                >
-                  <img
-                    src={company?.imageUrl}
-                    className="h-12 w-12 rounded-full"
-                  />
+                    <div className="flex flex-col">
+                      <p className="body-bold font-serif text-xs">
+                        {user?.name}
+                      </p>
+                      <p
+                        className={`${
+                          !isDark ? "text-stone-200" : "text-stone-600"
+                        } font-serif text-[10px] xl:text-xs `}
+                      >
+                        {user?.email}
+                      </p>
+                    </div>
+                  </Link>
+                ) : (
+                  <Link
+                    className="flex gap-2 items-center"
+                    to={`/company/${company?.id}`}
+                  >
+                    <img
+                      src={company?.imageUrl}
+                      className="h-12 w-12 rounded-full"
+                    />
 
-                  <div className="flex flex-col">
-                    <p
-                      className={`${
-                        !isDark && "text-stone-200"
-                      } body-bold font-serif text-xs `}
-                    >
-                      {company?.name}
-                    </p>
-                    <p
-                      className={`${
-                        !isDark ? "text-stone-200" : "text-stone-600"
-                      }  font-serif text-[10px] xl:text-xs`}
-                    >
-                      {company?.email}
-                    </p>
-                  </div>
-                </Link>
-              )}
-            </ListItemText>
+                    <div className="flex flex-col">
+                      <p
+                        className={`${
+                          !isDark && "text-stone-200"
+                        } body-bold font-serif text-xs `}
+                      >
+                        {company?.name}
+                      </p>
+                      <p
+                        className={`${
+                          !isDark ? "text-stone-200" : "text-stone-600"
+                        }  font-serif text-[10px] xl:text-xs`}
+                      >
+                        {company?.email}
+                      </p>
+                    </div>
+                  </Link>
+                )}
+              </ListItemText>
+            )}
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -263,24 +270,45 @@ export default function SwipeableTemporaryDrawer() {
         </ListItem>
 
         <ListItem disablePadding>
-          <ListItemButton
-            disabled={isLogingOut}
-            onClick={() => logoutUser()}
-            className={`text-2xl ${!isDark && "text-stone-200"} ${
-              pathname === "/" && "text-primary-600 font-bold"
-            }`}
-          >
-            <ListItemIcon>
-              <HiOutlineArrowLeftOnRectangle
-                className={`${!isDark && "text-stone-200"} text-2xl`}
-              />
-            </ListItemIcon>
-            <ListItemText>
-              <span className={`${!isDark && "text-stone-200"} text-xl`}>
-                გასვლა
-              </span>
-            </ListItemText>
-          </ListItemButton>
+          {getSession?.includes("a_session_") ? (
+            <ListItemButton
+              disabled={isLogingOut}
+              onClick={() => logoutUser()}
+              className={`text-2xl ${!isDark && "text-stone-200"} ${
+                pathname === "/" && "text-primary-600 font-bold"
+              }`}
+            >
+              <ListItemIcon>
+                <HiOutlineArrowLeftOnRectangle
+                  className={`${!isDark && "text-stone-200"} text-2xl`}
+                />
+              </ListItemIcon>
+              <ListItemText>
+                <span className={`${!isDark && "text-stone-200"} text-xl`}>
+                  გასვლა
+                </span>
+              </ListItemText>
+            </ListItemButton>
+          ) : (
+            <ListItemButton
+              disabled={isLogingOut}
+              onClick={() => navigate("/login")}
+              className={`text-2xl ${!isDark && "text-stone-200"} ${
+                pathname === "/" && "text-primary-600 font-bold"
+              }`}
+            >
+              <ListItemIcon>
+                <HiOutlineArrowRightOnRectangle
+                  className={`${!isDark && "text-stone-200"} text-2xl`}
+                />
+              </ListItemIcon>
+              <ListItemText>
+                <span className={`${!isDark && "text-stone-200"} text-xl`}>
+                  შესვლა
+                </span>
+              </ListItemText>
+            </ListItemButton>
+          )}
         </ListItem>
       </List>
     </Box>

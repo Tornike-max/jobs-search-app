@@ -1,9 +1,11 @@
+import { useDarkMode } from "../context/useDarkMode";
 import SignupCompanyForm from "../features/auth/SignupCompanyForm";
 import SignupForm from "../features/auth/SignupForm";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { useSearchParams } from "react-router-dom";
 
 export default function SignUpPage() {
+  const { isDark } = useDarkMode();
   const [searchParams, setSearchParams] = useSearchParams();
   const getFormType = searchParams.get("signUp") || "user";
 
@@ -12,8 +14,8 @@ export default function SignUpPage() {
     setSearchParams(searchParams);
   }
   return (
-    <div className="bg-primary-900 h-full pt-4">
-      <ButtonGroup className="flex items-center gap-2 justify-center w-full md:justify-end px-[15%]">
+    <div className={`${!isDark && "bg-primary-800"} h-full pt-4`}>
+      <ButtonGroup className="flex items-center gap-2 justify-center w-full">
         <Button
           onClick={() => handleToggle("user")}
           variant="ghost"
@@ -21,7 +23,7 @@ export default function SignUpPage() {
           size="sm"
           className={`${
             getFormType === "user" && "bg-primary-500 text-stone-100"
-          }`}
+          } ${!isDark && "text-stone-200"}`}
         >
           როგორც მომხმარებელი
         </Button>
@@ -32,7 +34,7 @@ export default function SignUpPage() {
           size="sm"
           className={`${
             getFormType === "company" && "bg-primary-500 text-stone-100"
-          }`}
+          } ${!isDark && "text-stone-200"}`}
         >
           როგორც, კომპანია
         </Button>

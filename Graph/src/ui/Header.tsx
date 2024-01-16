@@ -6,15 +6,17 @@ import {
   // HiOutlineTableCells,
   // HiOutlineVideoCamera,
 } from "react-icons/hi2";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/useUserContext";
 import { useLogout } from "../hooks/authHooks/useLogout";
 import { Switch } from "@nextui-org/react";
 import { useDarkMode } from "../context/useDarkMode";
 
 export default function Header() {
+  const navigate = useNavigate();
   const { isDark } = useDarkMode();
   const { logoutUser, isLogingOut } = useLogout();
+  const getSession = localStorage.getItem("cookieFallback");
   const { user, company } = useUserContext();
   const { pathname } = useLocation();
   const { handleChange } = useDarkMode();
@@ -93,55 +95,68 @@ export default function Header() {
           startContent={<HiOutlineSun />}
           endContent={<HiOutlineMoon />}
         />
-        {loginType ? (
-          <Link
-            to={`/account/${user?.accountId}`}
-            className="flex gap-2 items-center"
-          >
-            <div className="flex flex-col">
-              <p className="body-bold font-serif text-xs">
-                {user?.name || company?.name}
-              </p>
-              <p
-                className={`${
-                  !isDark ? "text-stone-200" : "text-stone-600"
-                } font-serif text-[10px] xl:text-xs`}
-              >
-                @{user?.email || company?.email}
-              </p>
-            </div>
-            <img
-              src={user?.imageUrl || company?.imageUrl}
-              className="h-12 w-12 rounded-full"
-            />
-          </Link>
-        ) : (
-          <Link
-            to={`/company/${company.id}`}
-            className="flex gap-2 items-center"
-          >
-            <div className="flex flex-col">
-              <p className="body-bold font-serif text-xs">{company?.name}</p>
-              <p
-                className={`${
-                  !isDark && "text-stone-200"
-                } font-serif text-[10px] xl:text-xs`}
-              >
-                @{company?.email}
-              </p>
-            </div>
-            <img src={company?.imageUrl} className="h-12 w-12 rounded-full" />
-          </Link>
-        )}
+        <>
+          {!getSession?.includes("a_session_") ? (
+            ""
+          ) : loginType ? (
+            <Link
+              to={`/account/${user?.accountId}`}
+              className="flex gap-2 items-center"
+            >
+              <div className="flex flex-col">
+                <p className="body-bold font-serif text-xs">
+                  {user?.name || company?.name}
+                </p>
+                <p
+                  className={`${
+                    !isDark ? "text-stone-200" : "text-stone-600"
+                  } font-serif text-[10px] xl:text-xs`}
+                >
+                  @{user?.email || company?.email}
+                </p>
+              </div>
+              <img
+                src={user?.imageUrl || company?.imageUrl}
+                className="h-12 w-12 rounded-full"
+              />
+            </Link>
+          ) : (
+            <Link
+              to={`/company/${company.id}`}
+              className="flex gap-2 items-center"
+            >
+              <div className="flex flex-col">
+                <p className="body-bold font-serif text-xs">{company?.name}</p>
+                <p
+                  className={`${
+                    !isDark && "text-stone-200"
+                  } font-serif text-[10px] xl:text-xs`}
+                >
+                  @{company?.email}
+                </p>
+              </div>
+              <img src={company?.imageUrl} className="h-12 w-12 rounded-full" />
+            </Link>
+          )}
+        </>
 
-        <button
-          disabled={isLogingOut}
-          onClick={() => logoutUser()}
-          className={`${linkClasses} `}
-        >
-          <HiOutlineArrowRightOnRectangle />
-          <span>გასვლა</span>
-        </button>
+        {!getSession?.includes("a_session_") ? (
+          <button
+            className={`${linkClasses}`}
+            onClick={() => navigate("/login")}
+          >
+            შესვლა
+          </button>
+        ) : (
+          <button
+            disabled={isLogingOut}
+            onClick={() => logoutUser()}
+            className={`${linkClasses} `}
+          >
+            <HiOutlineArrowRightOnRectangle />
+            <span>გასვლა</span>
+          </button>
+        )}
       </div>
     </ul>
   );

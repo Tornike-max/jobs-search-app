@@ -6,6 +6,7 @@ import { useDarkMode } from "../../context/useDarkMode";
 export default function Publication({ data }: { data: Models.Document }) {
   const { isDark } = useDarkMode();
   const navigate = useNavigate();
+  const getSession = localStorage.getItem("cookieFallback");
 
   function handleChange(value: number) {
     const type = value === 2 ? "Standart" : "VIP";
@@ -61,14 +62,25 @@ export default function Publication({ data }: { data: Models.Document }) {
               სტანდარტული განცხადება: {data?.publication_price} {data.currency}
             </span>
             <div className="w-full flex justify-end items-center">
-              <Button
-                onClick={() => handleChange(data?.publication_price)}
-                variant="ghost"
-                color="primary"
-                className={`${!isDark && "text-stone-200"}`}
-              >
-                გამოაყვეყნე სტანდარტული განცხადება
-              </Button>
+              {getSession?.includes("a_session_") ? (
+                <Button
+                  onClick={() => handleChange(data?.publication_price)}
+                  variant="ghost"
+                  color="primary"
+                  className={`${!isDark && "text-stone-200"}`}
+                >
+                  გამოაყვეყნე სტანდარტული განცხადება
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => navigate("/login")}
+                  variant="ghost"
+                  color="primary"
+                  className={`${!isDark && "text-stone-200"}`}
+                >
+                  გამოაყვეყნე სტანდარტული განცხადება
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -90,14 +102,25 @@ export default function Publication({ data }: { data: Models.Document }) {
               VIP-განცხადება: {data?.vip_publication_price} {data.currency}
             </span>
             <div className="w-full flex justify-end items-center">
-              <Button
-                onClick={() => handleChange(data?.vip_publication_price)}
-                variant="ghost"
-                color="primary"
-                className={`${!isDark && "text-stone-200"}`}
-              >
-                გამოაქვეყნე VIP-განცხადება
-              </Button>
+              {getSession?.includes("a_session_") ? (
+                <Button
+                  onClick={() => handleChange(data?.vip_publication_price)}
+                  variant="ghost"
+                  color="primary"
+                  className={`${!isDark && "text-stone-200"}`}
+                >
+                  გამოაქვეყნე VIP-განცხადება
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => navigate("/login")}
+                  variant="ghost"
+                  color="primary"
+                  className={`${!isDark && "text-stone-200"}`}
+                >
+                  გამოაქვეყნე VIP-განცხადება
+                </Button>
+              )}
             </div>
           </div>
         </div>

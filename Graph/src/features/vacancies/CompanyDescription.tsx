@@ -12,12 +12,15 @@ export default function CompanyDescription() {
   const { companyId } = useParams();
   const { isDark } = useDarkMode();
   const { data, isPending } = useGetSingleCompany(companyId || "");
+  const getSession = localStorage.getItem("cookieFallback");
 
   if (isPending) return <Loader color="primary" />;
 
   function handleNavigate(id: string) {
     navigate(`/company/edit/${id}`);
   }
+  console.log(companyId);
+  console.log(data);
   return (
     <div className="max-w-[1920px] w-full flex justify-center items-center flex-col px-10 gap-10">
       <div className="w-full flex justify-center items-start gap-6 flex-col">
@@ -143,15 +146,18 @@ export default function CompanyDescription() {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div
-                    onClick={() => handleNavigate(job.$id)}
-                    className={`text-xs cursor-pointer hover:underline sm:text-sm flex items-center gap-1 font-medium ${
-                      !isDark ? "text-stone-200" : "text-gray-800"
-                    }`}
-                  >
-                    <span>შესწორება</span>
-                    <HiOutlinePencil />
-                  </div>
+                  {getSession?.includes("a_session_") &&
+                    companyId === data.$id && (
+                      <div
+                        onClick={() => handleNavigate(job.$id)}
+                        className={`text-xs cursor-pointer hover:underline sm:text-sm flex items-center gap-1 font-medium ${
+                          !isDark ? "text-stone-200" : "text-gray-800"
+                        }`}
+                      >
+                        <span>შესწორება</span>
+                        <HiOutlinePencil />
+                      </div>
+                    )}
                 </td>
               </tr>
             )

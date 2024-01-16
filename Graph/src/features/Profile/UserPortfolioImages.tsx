@@ -12,6 +12,7 @@ import { formatDate } from "../../ui/formatDate";
 import { useDarkMode } from "../../context/useDarkMode";
 import { HiOutlineXCircle } from "react-icons/hi2";
 import ConfrimDeleting from "../../ui/ConfrimDeleting";
+import { useParams } from "react-router-dom";
 
 export default function UserPortfolioImages({
   imageUrl,
@@ -19,6 +20,7 @@ export default function UserPortfolioImages({
   location,
   $createdAt,
   postId,
+  id,
 }: {
   imageUrl: string;
   caption: string;
@@ -26,6 +28,7 @@ export default function UserPortfolioImages({
   $createdAt: string;
   postId: string;
   portfolios?: Models.Document[];
+  id: string;
 }) {
   const {
     isOpen: isOpen2,
@@ -35,7 +38,8 @@ export default function UserPortfolioImages({
 
   const { isDark } = useDarkMode();
   const { onOpen, onOpenChange, isOpen } = useDisclosure();
-
+  const getSession = localStorage.getItem("cookieFallback");
+  const { accountId } = useParams();
   return (
     <>
       <Card
@@ -43,14 +47,16 @@ export default function UserPortfolioImages({
           !isDark ? "bg-primary-800 text-stone-100" : "bg-stone-100"
         } `}
       >
-        <div onClick={() => onOpen2()}>
-          <button
-            color="error"
-            className="absolute top-2 right-2 hover:text-red-600 "
-          >
-            <HiOutlineXCircle className="text-2xl" />
-          </button>
-        </div>
+        {getSession?.includes("a_session_") && accountId === id && (
+          <div onClick={() => onOpen2()}>
+            <button
+              color="error"
+              className="absolute top-2 right-2 hover:text-red-600 "
+            >
+              <HiOutlineXCircle className="text-2xl" />
+            </button>
+          </div>
+        )}
 
         <CardHeader className="pb-0 pt-2 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{location}</p>

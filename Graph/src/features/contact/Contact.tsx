@@ -28,13 +28,11 @@ export default function Contact() {
         "a_KAVZ376pxPQeNDY"
       )
       .then(
-        (result) => {
-          toast.success("Email sent Successfully ✅");
-          console.log(result);
+        () => {
+          toast.success("Email sent Successfully");
         },
         (error) => {
-          toast.error("Error while sent email ❌");
-          console.log(error.text);
+          toast.error("Error while sent email ❌", error.text);
         }
       );
     reset();

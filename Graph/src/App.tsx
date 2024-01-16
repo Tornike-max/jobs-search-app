@@ -60,9 +60,10 @@ export default function App() {
 
           <Route path="/account/:accountId" element={<UserPage />} />
           <Route path="/profile/:curAccountId" element={<SensitiveInfo />} />
+
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Route>
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

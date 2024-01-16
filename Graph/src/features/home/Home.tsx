@@ -19,6 +19,7 @@ export default function Home({
   const [openComments, setOpenComments] = useState<{ [key: string]: boolean }>(
     {}
   );
+
   const { isDark } = useDarkMode();
 
   const toggleComment = useCallback((postId: string) => {

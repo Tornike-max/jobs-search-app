@@ -864,8 +864,7 @@ export async function filterJobs(
     }
 
     if (searchValue) {
-      console.log(searchValue);
-      queries.push(Query.equal("name", searchValue));
+      queries.push(Query.search("name", searchValue));
     }
 
     if (getSalary) {

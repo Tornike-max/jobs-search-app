@@ -8,8 +8,10 @@ import SmallSpinner from "../../ui/SmallSpinner";
 import { useLogin } from "../../hooks/authHooks/useLogin";
 import toast from "react-hot-toast";
 import { useUserContext } from "../../context/useUserContext";
+import { useDarkMode } from "../../context/useDarkMode";
 
 export default function SignupForm() {
+  const { isDark } = useDarkMode();
   const { signup, isRegistring } = useSignup();
   const { login, isLogingin } = useLogin();
   const navigate = useNavigate();
@@ -67,13 +69,14 @@ export default function SignupForm() {
     }
   };
   return (
-    <div className="max-w-[1920px] flex justify-center bg-primary-900 items-center">
-      <div className="w-full h-screen shadow-2xl hidden md:flex justify-center items-center">
-        <img src="vite.svg" className="w-96 h-96" />
-      </div>
+    <div
+      className={`max-w-[1920px] flex justify-center ${
+        !isDark && "bg-primary-800"
+      }  items-center`}
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full flex mx-20 md:mx-6 justify-center items-center flex-col my-10"
+        className="max-w-3xl w-full flex mx-20 md:mx-6 justify-center items-center flex-col my-10"
       >
         <div className="flex justify-center items-center flex-col gap-2 mb-4">
           <Chip
@@ -84,7 +87,11 @@ export default function SignupForm() {
           >
             შექმენი აკაუნტი
           </Chip>
-          <span className="text-slate-200 font-semibold text-xs text-center">
+          <span
+            className={`${
+              !isDark ? "text-stone-200" : "text-stone-800"
+            } font-semibold text-xs text-center`}
+          >
             იმისთვის, რომ გამოიყენოთ აპლიკაცია, გთხოვთ შეიყვანეთ მონაცემები
           </span>
         </div>
@@ -92,7 +99,7 @@ export default function SignupForm() {
         <div className="flex w-full flex-wrap mb-6 md:mb-4 gap-4  px-4">
           <Input
             type="text"
-            variant="bordered"
+            variant="faded"
             label="მომხმარებლის სახელი"
             color={errors.name?.message ? "danger" : "primary"}
             className="bg-none text-stone-200"
@@ -105,7 +112,7 @@ export default function SignupForm() {
         <div className="flex w-full flex-wrap mb-6 md:mb-4 gap-4  px-4">
           <Input
             type="email"
-            variant="bordered"
+            variant="faded"
             label="ელ-ფოსტა"
             color={errors.email?.message ? "danger" : "primary"}
             className="bg-none text-stone-200"
@@ -119,7 +126,7 @@ export default function SignupForm() {
         <div className="flex w-full flex-wrap mb-6 md:mb-4 gap-4  px-4">
           <Input
             type="password"
-            variant="bordered"
+            variant="faded"
             label="პაროლი"
             color={errors.password?.message ? "danger" : "primary"}
             className="bg-none text-stone-200"
@@ -132,7 +139,7 @@ export default function SignupForm() {
         <div className="flex w-full flex-wrap mb-6 md:mb-4 gap-4 px-4">
           <Input
             type="password"
-            variant="bordered"
+            variant="faded"
             label="გაიმეორეთ პაროლი"
             color={errors.password2?.message ? "danger" : "primary"}
             className="bg-none text-stone-200"
@@ -146,7 +153,11 @@ export default function SignupForm() {
         </div>
 
         <div className="w-full px-4 gap-2 flex justify-center items-end flex-col">
-          <p className="text-white text-xs">
+          <p
+            className={`${
+              !isDark ? "text-stone-200" : "text-stone-800"
+            } text-xs`}
+          >
             უკვე გაქვთ ანგარიში?, დააჭირეთ{" "}
             <Link className="text-indigo-500 font-semibold" to="/login">
               აქ
